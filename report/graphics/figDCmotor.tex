@@ -1,0 +1,45 @@
+\draw
+(0,0) to[V, l^=\(V_m\)]  ++(0,3)
+to[R, l^=\(R_m\)] ++(2,0)
+to[L, l^=\(L_m\)] ++(2,0)
+to ++(0,-1.5) node[draw, rectangle, minimum height = 2cm, minimum width = 0.5cm, fill=black!10] (rotor_block) {}
+node[draw, circle, minimum height = 1.25cm,fill=black!10] {}
+node[circle, minimum height = 1.5cm] (rotor) {}
+node[above] at (rotor.135) {\(+\)}
+node[xshift=-0.5cm] at (rotor.180) {\(V_{EMF}\)}
+node[below] at (rotor.225) {\(-\)}
+(rotor_block) |- (0,0)
+(1.0,1.5) node[text width=2cm, text centered] (circ) {} 
+;
+\draw[->,thick] (circ.45) ++(0.5,0) arc(270:90:-5mm) ;
+\draw (circ.270) ++(0.8,0) node {\( i_m \)};
+
+%\draw
+%(7,5) -- ++(-1,-1)
+%to[L] ++(-1,1) 
+%-- ++(1,1)
+%++(0,-1) node[text width=1cm, text centered] {fixed field}
+%;
+
+
+\draw
+(6,1.5) node[ellipse,minimum width=0.75cm, minimum height=2.5cm] (around_rot) {}
+(6,1.5) node[ellipse,draw,minimum width=0.5cm, minimum height=2cm,top color = white, bottom color = black] (rot_back) {}
+++(0.05,0) node[ellipse,minimum width=0.5cm, minimum height=2cm,top color = white, bottom color = black] {}
+++(0.05,0) node[ellipse,minimum width=0.5cm, minimum height=2cm,top color = white, bottom color = black] {}
+++(0.05,0) node[ellipse,minimum width=0.5cm, minimum height=2cm,top color = white, bottom color = black] {}
+++(0.05,0) node[ellipse,minimum width=0.5cm, minimum height=2cm,top color = white, bottom color = black] {}
+node[ellipse,draw,minimum width=0.5cm, minimum height=2cm,fill=black!30] (rot_front) {} node {\(J\)}
+;
+;
+\draw[shorten >=0.4bp, shorten <=0.4bp] 
+(rot_front.88) to (rot_back.92)
+;
+\draw[shorten >=0.4bp, shorten <=0.4bp] 
+(rot_front.272) to (rot_back.268)
+;
+
+%\draw[->,very thick] (around_rot.110) to[bend right=10] ++(-0.12,-0.7);
+\draw[->,very thick] (around_rot.110) ++(-0.2,0.2) node[above,xshift=-0.1cm] {\(\omega\)} to[bend right=10] ++(-0.12,-0.7);
+\draw[->,very thick] (around_rot.250) node[below,xshift=-0.2cm] {\(T_f\)} to[bend left=10] ++(-0.12,0.7) ;
+
