@@ -9,6 +9,8 @@
 *.out
 *.soc
 *.log
+*.fdb_latexmk
+*.fls
 
 #Matlab
 .~lock.*
