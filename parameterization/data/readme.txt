@@ -6,4 +6,4 @@ C2filtered00013
 
 Transien response - 8ish Volt
 C1transient
-
+Resistor = 62,128 Ohm
