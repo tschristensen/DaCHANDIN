@@ -1,23 +1,26 @@
 clc;clear;close all;
 
-ra_data_enc_motor = csvread('ra_data_enc_motor.csv',1,0);
+ra_data_enc_motor = csvread('ra_data_motor_01.csv',1,0);
 
 V = ra_data_enc_motor(:,1);
 I = ra_data_enc_motor(:,2);
 
-f = fittype('a*x+b');
 
-fit2 = fitlm(V,I)
+%fit1 = fitlm(V,I,'y~x1-1')
+fit1 = fitlm(V,I)
 %[fit1,gof,fitinfo] = fit(V,I,f,'StartPoint',[1 1]);
 
 Ra = sum(V)/sum(I)
 
 fig_x = 400*2; fig_y = 225*2;
-fitted = fit2.Fitted
+fitted = fit1.Fitted;
 figure('Position',[100,100,fig_x,fig_y])
 plot(V,fitted,'r-',V,I,'o')
-legend('Data Points', 'Fitted Line', 'Location', 'northwest')
+legend('Fitted Line','Data Points', 'Location', 'northwest')
 title('Current as a Function of Voltage')
 xlabel('Voltage [V]')
 ylabel('Current [I]')
+axis([0,6,-0.2,2])
 
+%Ra = 1/fit1.Coefficients.Estimate(1)
+Ra = 1/fit1.Coefficients.Estimate(2)
