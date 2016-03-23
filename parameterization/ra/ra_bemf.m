@@ -107,9 +107,6 @@ velocity(37) = -1*sum(rec1_098.Y.Data)/length(rec1_098.Y.Data)*(2*pi/60);
 velocity(38) = -1*sum(rec1_099.Y.Data)/length(rec1_099.Y.Data)*(2*pi/60);
 velocity(39) = -1*sum(rec1_100.Y.Data)/length(rec1_100.Y.Data)*(2*pi/60);
 
-9.965
-1.554
-
 i_m = csvread('v_vs_i.csv',1,0);
 Re = i_m(1,3)
 i_m = i_m(:,2);

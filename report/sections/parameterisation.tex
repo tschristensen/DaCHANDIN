@@ -54,7 +54,7 @@ This value is within 1.2\% of the value given in the datasheet \cite{pittmann}.
 \end{figure}
 
 \subsection{Armature Resistance - $R_a$}
-\paragraph{Method 1:}~\\
+\paragraph{Method I}~\\
 The armature resistance, $R_a$ in figure \ref{fig:dcmotormodel}, can be found simply by applying Ohm's law.
 The current through a resistor is well defined when a voltage is applied across it.
 
@@ -85,9 +85,9 @@ Additionally, the final data points seem to become irregular.
 This is likely caused by the high currents drawn by the motor at these voltages warming the motor and therefore slightly altering the characteristics of the resistor.
 
 For these reasons it has been decided to pursue a different means of determining the armature resistance:
-\paragraph{Method 2}~\\
+\paragraph{Method II}~\\
 This method makes use of the voltage constant found in section \ref{sec:voltconstat}.
-By expanding $V_cc$ in equation \ref{eq:voltconstant} an expression for $R_a$ can be found:
+By expanding $V_{cc}$ in equation \ref{eq:voltconstant} an expression for $R_a$ can be found:
 \begin{equation}
 	\label{eq:voltconstantexpanded}
 	K_e\omega_r = V_{cc} = I_aR_a\quad \Rightarrow \quad R_a = \frac{\omega_rK_e}{I_a}
@@ -105,3 +105,5 @@ where $R_t$ is the total resistance in the system.
 As the voltage across the terminals of the Pittmann 9234S006 is increased the resulting velocity and current is noted.
 Finally, the armature resistance is found to be:
 $$R_a = 3.715\Omega$$
+
+This value, curiously, coincides with the one found using method I.
