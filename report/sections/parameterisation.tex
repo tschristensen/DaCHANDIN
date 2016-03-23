@@ -41,3 +41,38 @@ $$R_a = \frac{1}{\text{slope}} = 3.02\Omega$$
 However, at $I(0)$ the model will result in a small negative current.
 This is obviously not correct; no current would be expected at zero voltage.
 Adjusting the model such that it will intersect the origin results in a higher resistance of $R_a=3.43\Omega$.
+
+\subsection{Motor inductance - $L_a$}
+The inductance of the motor, $L_a$ in figure \ref{fig:dcmotormodel}, can be found by looking at the transient response of the motor. 
+When the motor is stalled there is no back-EMF in the circuit. The motor can then be modelled as a simple RL-circuit. 
+An RL-circuit has a known time constant $\tau$.
+$$\tau = \frac{L}{R_{total}}$$
+The time onstant is defined as the time it takes for the voltage across the component to rise or fall to $\frac{1}{e}$ of the final value.
+Measuring the time constant would require measuring the voltage across the inductor or the resistor in the motor. This is not possible as these are built-in. 
+Therefore an extra resistor, $R_e$, was put in series with the motor and the voltage across it was measured by an oscilloscope. 
+$$\tau = \frac{L}{R_{total}} = \frac{L_a}{R_a+R_e}$$
+Rearraring the formula for $\tau$ yields an expression for $L_a$: 
+$$L_a = \tau * (R_a + R_e)$$
+To give the circuit a step signal it was given a voltage of 8 V by a power supply and then the terminals of the power supply was  short circuited by connecting the terminals with a wire. Thus giving it a step signal with a initial value of 8 V and a final value of 0 V.
+The experiment was repeated 10 times. $\tau$ can be found by locating the time where the measured voltage is equal to $\frac{1}{e}$ of the initial voltage.
+
+\subsubsection{Experiment}
+The extra resistor, $R_e$, was measured by a multimeter to have a value of $32.97\Omega$.
+Then the circuit was given the step signal while measuring the voltage.
+The transient responses measured across $R_e$ can be seen in figure \ref{fig:trans_plot}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/transient_32ohm}
+	\caption{Transient responses measured across $R_e$. The red vertical lines represent the initial voltage, $V_0$, and $\frac{1}{e} \cdot V_0$.}
+	\label{fig:trans_plot}
+\end{figure}
+
+
+$\tau$ was found to be 0.713 $\cdot 10^4 s$, by taking the average of the found values from the 10 experiments.
+The average value of $L_a$ was then found to be 2.6 mH. The value is only $3.83\%$ higher than the value in the datasheet.
+
+\subsubsection{Discussion}
+Only the voltage across $R_e$ is measured, which is problematic as it is assumed in the formula that the transient response is measured across the whole resistance of the circuit. Choosing a value for $R_e$ that is much larger than $R_a$ would minimize the problem.
+The experiment was done with values of $R_e$ ranging from $33\Omega$ to $3.3K\Omega$.
+Results generally showed that higher values of $R_e$ yielded more difference between the calculated values of $L_a$ and the value given in the datasheet.
