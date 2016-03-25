@@ -190,7 +190,7 @@ As can be seen, the slope, and therefore the values of $K_v$ are nearly identica
 A reasonable explanation for this inconsistency has yet to be devised.
 
 \subsection{Motor inductance - $L_a$}
-The inductance of the motor, $L_a$ in figure \ref{fig:dcmotormodel}, can be found by looking at the transient response of the motor. 
+The inductance of the motor, $L_a$ in figure \ref{fig:dcmotormodel}, can be found by looking at the transient response of the stalled motor. 
 When the motor is stalled there is no back-EMF in the circuit. The motor can then be modelled as a simple RL-circuit. 
 An RL-circuit has a known time constant $\tau$.
 $$\tau = \frac{L}{R_{total}}$$
@@ -223,3 +223,33 @@ The average value of $L_a$ was then found to be 2.6 mH. The value is only $3.83\
 Only the voltage across $R_e$ is measured, which is problematic as it is assumed in the formula that the transient response is measured across the whole resistance of the circuit. Choosing a value for $R_e$ that is much larger than $R_a$ would minimize the problem.
 The experiment was done with values of $R_e$ ranging from $33\Omega$ to $3.3K\Omega$.
 Results generally showed that higher values of $R_e$ yielded more difference between the calculated values of $L_a$ and the value given in the datasheet.
+
+\subsection{Motor Inertia - $J_r$}
+The inertia of the motor, $J_r$ in figure \ref{fig:dcmotormodel}, can be found by looking at the transient response of the motor. 
+It is known from \cite{feedback}, that the inertia of a motor can be calculed by the following equation.
+$$J_m = (K_{fm}+\frac{K_m^2}{R_a}) \cdot T$$
+Where the time constant T is expressed by:
+$$ T = \frac{J_m}{K_{fm}+\frac{K_m^2}{R_a}}$$
+T is not easily calculated as $J_r$ is an unknown. Instead it is known that the current at time T can be expressed as:
+$$ i_a(T) = \frac{K_{fm} \cdot R_a + K_m^2 \cdot e^{-1}}{K_{fm} \cdot R_a + K_m^2} \cdot \frac{v_{ass}}{R_a} $$
+The time constant T can be found by looking at the transient response of the motor. 
+The time it takes from the time of the step input to the current falls to the value of $i_a(T)$ is be T.
+
+\subsubsection{Experiment}
+An oscilloscope was used to measure the transient response of the motor when given a voltage step input. A current probe was connected to the oscilloscope and the current through the motor was thereby measured.
+Step inputs of 1V, 2V, 3V,\dots 10V was used and 5 datasets were collected at each step signal value.  
+5 transient responses of the motor given a step input of 7V can be seen in figure \ref{fig:inertia_trans_plot}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/transient_response_inertia}
+	\caption{Transient responses of the motor given a 7V step input. The horizontal line represent the value of $i_a(T)$ and the vertical line represents T.}
+	\label{fig:inertia_trans_plot}
+\end{figure}
+
+With a step input of 7V and using the measured values for $K_{fm}$,$R_a$ and $K_m$ the mean value of $i_a(T)$ was calculated to be 0.88 I. 
+The mean value of T was then found to be 0.015 s and lastly the mean value of $J_r$, with a step input of 7V, was found to be $6.54 \cdot 10^{-6} \cdot kg \cdot m^2$.
+
+\par
+The mean value of $J_r$ from all the experiments with varying step input value was found to be $ 6.508 \cdot 10^{-6} \cdot kg \cdot m^2$ which is $56\%$ higher than the value given in the datasheet. 
+\todo[inline]{Mikkel. Recalculate all values with the measured values of Ra, Kfm and so on}
