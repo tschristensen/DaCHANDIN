@@ -32,7 +32,7 @@ xlabel('Angular Velocity [$\frac{Rad}{S}$]','interpreter','LaTex')
 ylabel('Torque [$Nm$]','interpreter','LaTex')
 
 figure('Position',[100,100,fig_x,fig_y])
-plot(w(1:48)*(2*pi/60),Te(1:48),'-bo')
+plot(w(1:40)*(2*pi/60),Te(1:40),'-bo')
 grid on
 legend('Total Friction', 'Location', 'northwest')
 title('Torque as a Function of Angular Velocity, Low $\omega_r$','interpreter','LaTex')

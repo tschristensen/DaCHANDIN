@@ -6,7 +6,7 @@ The parameters of this model will be estimated by experimentation.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/dcmotormodel.png}
+	\includegraphics[width=.75\linewidth]{graphics/dcmotormodel.png}
 	\caption{Simulink model of a brushed DC motor.}
 	\label{fig:dcmotormodel}
 \end{figure}
@@ -48,7 +48,7 @@ This value is within 1.2\% of the value given in the datasheet \cite{pittmann}.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/vvsrpm}
+	\includegraphics[width=.75\linewidth]{graphics/vvsrpm}
 	\caption{Angular velocity of the shaft at different voltages.}
 	\label{fig:velvsvolt}
 \end{figure}
@@ -60,7 +60,7 @@ The current through a resistor is well defined when a voltage is applied across 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/raplot}
+	\includegraphics[width=.75\linewidth]{graphics/raplot}
 	\caption{Current as a function of voltage with the rotor blocked.}
 	\label{fig:raplot}
 \end{figure}
@@ -76,18 +76,17 @@ According to the datasheet \cite{pittmann} the current at maximum allowed contin
 This current is reached at 5 V, therefore, the measurements stop there.
 As can be seen from the figure, a line is fitted to the data.
 This is done using the linear least squares method with the following result:
-$$I(V)=0.272\cdot V-0.042$$
-with $R^2=0.995$.
+$$I(V)=0.274\cdot V-0.047$$
+with $R^2=0.996$.
 Since for the plot $I(V)$:
-$$R_a = \frac{1}{\text{slope}} = 3.02\Omega$$
-However, at $I(0)$ the model will result in a small negative current.
-This is obviously not correct; no current would be expected at zero voltage.
-Adjusting the model such that it will intersect the origin results in a higher resistance of $R_a=3.43\Omega$.
+$$R_a = \frac{1}{\text{slope}} = 3.647\Omega$$
 
-$$R_a = \frac{1}{\text{slope}} = 3.683\Omega$$
 This value is significantly higher, approximately 25\% higher, than the value given in the datasheet.
 Additionally, the final data points seem to become irregular.
 This is likely caused by the high currents drawn by the motor at these voltages warming the motor and therefore slightly altering the characteristics of the resistor.
+Additionally, at $I(0)$ this model will result in a small negative current.
+This is obviously not correct; no current would be expected at zero voltage.
+Adjusting the model such that it will intersect the origin results in a higher resistance of $R_a=3.888\Omega$.
 
 For these reasons it has been decided to pursue a different means of determining the armature resistance:
 \paragraph{Method II}~\\
@@ -124,7 +123,7 @@ Formally:
 \end{equation}
 Viscous friction is proportional to the angular velocity, $\omega_r$ by the factor $K_v$.
 Determining this factor will be the goal of this section.
-Since $T_v=K_v\omega_r$ and $T_s$ can be neglected at high values of $\omega_r$ equation \ref{eq:totfriction} can be rewritten as:
+Since $T_v=K_v\omega_r$ and $T_s$ is negligible at high values of $\omega_r$ equation \ref{eq:totfriction} can be rewritten as:
 \begin{equation}
 	\label{eq:frictionnostatic}
 	T_e-(T_c+K_v\omega_r)=0 \quad \Rightarrow \quad K_v = \frac{T_e-T_c}{\omega_r}
@@ -142,29 +141,43 @@ $$K_e = \frac{T_e}{I_{ss}} \quad \Rightarrow \quad T_e = K_eI_{ss}$$
 
 Where $I_{ss}$ is the current through the motor at steady state.
 Figure \ref{fig:tqangle} shows $T_e$ as a function of $\omega_r$.
-As can be seen, the relationship is mostly linear when $\omega_r>250\frac{Rad}{S}$.
+As can be seen, the relationship is mostly linear when $\omega_r>300\frac{Rad}{S}$.
 Fitting a line to the linear part of this graph can be used to determine $T_c$.
 This line will have the same slope as $K_v$ and will therefore cross the y-axis at $T_c$.
 
 \subsubsection{Experiment}
 This experiment is conducted during no-load condition on the Pittmann 9234S007, as velocity measurements are required.
-A voltage, ranging from 0-24 V in 0.5 V steps is applied to the terminals of the motor.
-During each step the current through the motor and velocity of the rotor is recorded.
-Using the value of $K_e$ found in section \ref{sec:voltconstat} it is possible to calculate $T_e$, see figure \ref{fig:tqangle}. The fitted line is found to intersect the y-axis at:
+Initially, a voltage ranging from 0-24 V in 0.5 V steps was applied to the terminals of the motor, however, in order to better capture the effects of $T_s$, the range 0-1 V was recorded using 50 mV steps and from 1-2 V using 100 mV steps.
+During each step the current through the motor and angular velocity of the rotor is recorded.
+Using the value of $K_e$ found in section \ref{sec:voltconstat} it is possible to calculate $T_e$, see figure \ref{fig:tqangle}. The fitted line seen on figure \ref{fig:tqanglefull} is found to intersect the y-axis at:
 $$T_c=0.0028$$
 \begin{figure}[!h]
-	\centering
-	\includegraphics[width=\linewidth]{graphics/tevel}
+	\begin{subfigure}[t]{.49\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{graphics/tevel}
+		\caption{Full range, 0-24V.}
+		\label{fig:tqanglefull}
+	\end{subfigure}
+	\begin{subfigure}[t]{.49\linewidth}
+		\includegraphics[width=\textwidth]{graphics/tevel_low}
+		\caption{Partial range, 0-5V}
+		\label{fig:tqanglelow}
+	\end{subfigure}
 	\caption[Torque as a function of angular velocity]{Torque as a function of angular velocity. The fitted line represents the linear part of the total friction. The green line shows the value according to the datasheet.}
 	\label{fig:tqangle}
 \end{figure}
-Applying this value allows the calculation of $K_v$, see figure \ref{fig:visvel}. 
-Similarly to figure \ref{fig:tqangle}, the value of $K_v$ is only accurate at high values of $\omega_r$.
-For this reason the value $K_v$ is taken as the average of every reading where $\omega_r>300\frac{Rad}{S}$:
+
+Applying this value allows the calculation of $K_v$, see figure \ref{fig:visvel}.
+Ideally, as $\omega_r\rightarrow \infty$ this graph will converge to the value $K_v$. 
+Similarly to figure \ref{fig:tqangle}, at low values of $\omega_r$, $T_s$ is significant and is therefore not negligible.
+For this reason the value $K_v$ is taken as the average of every reading where $\omega_r>300\frac{Rad}{S}$. 
+This is the point where, by inspection, $T_e$ is mostly linear with increasing $\omega_r$:
 $$K_v=2.611\cdot 10^{-6}$$
+Additionally, \ref{fig:tqanglelow} shows the initial effect of the static friction on the system.
+The highest recorded static friction is $T_s=3.327*10^{-7}$.
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/visvel}
+	\includegraphics[width=.75\linewidth]{graphics/visvel}
 	\caption{Viscous damping factor as a function of angular velocity.}
 	\label{fig:visvel}
 \end{figure}
@@ -197,7 +210,7 @@ The transient responses measured across $R_e$ can be seen in figure \ref{fig:tra
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\linewidth]{graphics/transient_32ohm}
+	\includegraphics[width=.75\linewidth]{graphics/transient_32ohm}
 	\caption{Transient responses measured across $R_e$. The red vertical lines represent the initial voltage, $V_0$, and $\frac{1}{e} \cdot V_0$.}
 	\label{fig:trans_plot}
 \end{figure}
