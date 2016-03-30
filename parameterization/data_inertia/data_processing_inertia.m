@@ -16,7 +16,7 @@ data_files = dir('C1transient_I_7v*.dat');
 
 numfiles  = size(data_files,1);
 
-%Layout
+%Layout Docu
 fig_x = 400*2; fig_y = 225*2;
 figure('Position',[100,100,fig_x,fig_y])
 axis([-0.005 0.08 -0.05 1.5])

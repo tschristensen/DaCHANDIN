@@ -192,6 +192,7 @@ As can be seen, the slope, and therefore the values of $K_v$ are nearly identica
 A reasonable explanation for this inconsistency has yet to be devised.
 
 \subsection{Motor inductance - $L_a$}
+\paragraph{Method I}~\\
 The inductance of the motor, $L_a$ in figure \ref{fig:dcmotormodel}, can be found by looking at the transient response of the stalled motor. 
 When the motor is stalled there is no back-EMF in the circuit. The motor can then be modelled as a simple RL-circuit. 
 An RL-circuit has a known time constant $\tau$.
@@ -225,6 +226,51 @@ The average value of $L_a$ was then found to be 2.6 mH. The value is only $3.83\
 Only the voltage across $R_e$ is measured, which is problematic as it is assumed in the formula that the transient response is measured across the whole resistance of the circuit. Choosing a value for $R_e$ that is much larger than $R_a$ would minimize the problem.
 The experiment was done with values of $R_e$ ranging from $33\Omega$ to $3.3K\Omega$.
 Results generally showed that higher values of $R_e$ yielded more difference between the calculated values of $L_a$ and the value given in the datasheet.
+
+
+
+\paragraph{Method II}~\\
+The inductance of the motor can be found in another way as shown in this section. 
+If the duty cycle, D, is equal to 0.5 in a dual supply H-bridge the motor will experience the supply voltage positively in one half period and the supply voltage negatively in the next half period.
+If the frequency is not too low, the motor will not move and no back-EMF is induced in the motor. 
+Given that there is no back-EMF the motor can be accurately modelled as an RL-circuit.  
+In the first half period the RL-circuit would experience a postive voltage step. 
+The voltage step across the inductor will produce a change in current.
+This change in current can then be used to calculate the inductance of the motor.
+The elemental equation for the inductor can easily be rewritten to reveal the inductance when the duty cycle, D, the voltage, V, the change in current, $\Delta i$, and the time period, T, are knwon. 
+$$V = L \frac{di}{dt} \Rightarrow \Delta i = \frac{1}{L} \cdot D \cdot T \cdot V $$
+$$L = \frac{D \cdot T \cdot V}{\Delta i}$$
+
+
+\subsubsection{Experiments}
+Using dSPACE and a dual supply H-bridge the motor was given a duty cycle of 0.5 at varying frequencies.
+A plot of the current and voltage at 30kHz can be seen in figure \ref{fig:half_duty}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.75\linewidth]{graphics/half_duty}
+	\caption{Current and Voltage plots with $D = 0.5$ and a frequency of $30kHz$.}
+	\label{fig:half_duty}
+\end{figure}
+
+Z experiments were done with frequencies varying from yKHz to xKHz.
+All data was measured on an oscilloscope and used to calculate the inductance at each frequency.
+A plot of the inductance as a function of the frequency can be seen in figure \ref{fig:inductance_freq}.
+
+\todo[inline]{MAKE MORE EXPERIMENTS MIKKEL.}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.75\linewidth]{graphics/l_freq}
+	\caption{Incuctance as a function of frequency. The horizontal line represents the mean value of the inductance measured at frequencies above $25kHz$.}
+	\label{fig:inductance_freq}
+\end{figure}
+
+It can be seen quite easily that the inductance is not a constant, but it is varying with frequency. 
+At frequencies above 25kHz it seems that it is somewhat constant. 
+The  motor needs to be run at frequencies above 25kHz to be out of the audible range. 
+Therefore the mean value of all calculated inductances measured at above 25kHz is a good aproximation of the experienced inductance.
+The mean value is found to be XX and is shown in figure \ref{fig:inductance_freq} by a horizontal line.
+The mean value of the inductance is XX $\%$ higher than inductance given in the datasheet.	
 
 \subsection{Motor Inertia - $J_r$}
 The inertia of the motor, $J_r$ in figure \ref{fig:dcmotormodel}, can be found by looking at the transient response of the motor. 
