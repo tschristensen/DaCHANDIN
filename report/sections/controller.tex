@@ -109,20 +109,17 @@ During the function of the controller, there is a possibility that it will opera
 
 \subsection{Controller Gain Design}
 
+\subsubsection{Settling Time Formula}
+
+
 \begin{equation}
 \centering
 \label{eq:settling}
 \alpha = \dfrac{1.5(1 + n)}{T_s}
 \end{equation}
 
-\begin{equation}
-\centering
-\label{eq:standard}
-s^n + d_{n-1}s^{n-1} + \cdots + d_1 s + d_0 
-\end{equation}
-
-
 \begin{table}[!h]
+	\label{tb:coefsettlingtime}
 	\caption{ Coefficients of
 		closed loop differential
 		equation based on settling
@@ -136,8 +133,43 @@ s^n + d_{n-1}s^{n-1} + \cdots + d_1 s + d_0
 		$d_1$ & $2\alpha$ & $3\alpha^2$ & $4\alpha^3$\\
 		$d_2$ & - & $3\alpha$ & $6\alpha^2$\\
 		$d_0$ & - & - & $4\alpha$\\
-		\hline
+		\hline	
 		
-
 	\end{tabular}
 \end{table}
+
+
+\subsubsection{Full Order Systems}
+
+As the equations~\ref{eq:pidfulltf} and~\ref{eq:ipdfulltf} show, their denominator is in the standard form~\ref{eq:stdchararacteristic}. The coefficients from the characteristic equations can easily be matched with the ones from the standard form as shown in~\ref{eq:pidmatchingcoef} together with the coefficients table~\ref{tb:coefsettlingtime} where the order of the system in this case is $n=3$. \todo{Fix the ref to Table 2 }
+
+
+\begin{equation}
+\centering
+\label{eq:stdchararacteristic}
+s^n + d_{n-1}s^{n-1} + \cdots + d_1 s + d_0 
+\end{equation}
+
+\begin{align}
+\label{eq:pidmatchingcoef}
+d_0 &= b_0 K_I = \alpha^3
+\\
+d_1 &= a_0 + b_0 K_P = 3\alpha^2
+\\
+d_2 &= a_1 + b_0 K_D = 3\alpha
+\end{align}
+
+Solving the above equations using the parameters and $T_s=0.2$, the gains receive the values:
+\begin{align}
+\label{eq:gainsvaluesfull}
+K_I &= 
+\\
+K_P &= 
+\\
+K_D &= 
+\end{align}
+
+
+\subsubsection{Reduced Order Systems}
+
+
