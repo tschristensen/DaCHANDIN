@@ -168,8 +168,35 @@ K_P &=
 \\
 K_D &= 
 \end{align}
+\todo{calculate the gains!}
 
 
 \subsubsection{Reduced Order Systems}
 
+In the case of a reduced order system, the controller derivative's gain is equal to zero, and the transfer function takes the form of equation~\ref{eq:pireducedtf}.
+
+\begin{equation}
+\label{eq:pireducedtf}
+H(s) = \dfrac{b_0(K_Ps + K_I)}{s^2 + (a_0 + b_0 K_P)s + b_0 K_I }
+\end{equation}
+
+Matching the characteristic equation with the standard form and looking at the table~\ref{tb:coefsettlingtime}, the coefficients become:
+\todo{fix the table 2 reference!}
+
+\begin{align}
+\label{eq:pimatchingcoef}
+d_0 &= b_0 K_I = \alpha^2
+\\
+d_1 &= a_0 + b_0 K_P = 2s\alpha
+\end{align}
+
+Similarly, using the parameters and $T_s=0.2$, the gains in this case are:
+
+\begin{align}
+\label{eq:gainsvaluesreduced}
+K_I &= 
+\\
+K_P &= 
+\end{align}
+\todo{calculate the gains here too!}
 
