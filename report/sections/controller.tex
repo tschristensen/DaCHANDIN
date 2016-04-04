@@ -1,5 +1,7 @@
 \section{Controlling}
 
+\todo{PUT DOTS AT the end of figures' sentences}
+
 To control the speed of the DC motor a controller will have to be implemented in to the system. A block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. From the block diagram a transfer function $P(s)$ for the motor can be derived as seen in equation~\ref{eq:fullplant} on the form in equation~\ref{eq:simpleplant}.
 
 \begin{figure}[!h]
@@ -105,13 +107,41 @@ The derivative part of the PID controller will try to reduce every sudden change
 
 \subsection{Anti-Windup Design}
 
-During the function of the controller, there is a possibility that it will operate in a nonlinear region where increasing the control signal has no effect on the system output. This introduces time delay to the response of the system, thus reducing its overall performance. This behaviour can be counteracted using an anti-windup strategy such as the one in figure~\ref{fig:ipdantiwindupstrategy}. The gain K can be chosen doing experiments using trial and error.
+During the function of the controller, there is a possibility that it will operate in a nonlinear region where increasing the control signal has no effect on the system output. This introduces time delay to the response of the system, thus reducing its overall performance. This behaviour can be counteracted using an anti-windup strategy such as the one in figure~\ref{fig:ipdantiwindupstrategy}.
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.9\linewidth]{graphics/ipdwindupdesign}
 	\caption{Block diagram of the IPD controller with anti-windup strategy}
 	\label{fig:ipdantiwindupstrategy}
+\end{figure}
+
+As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces smoother behaviour into the system. The gain $K$ is the one that determines that behaviour and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in the figure~\ref{fig:pidwindupvaluecomp}.
+\todo{CHECK if PID K = 10 and IPD K = 10000 is true and correct!!!}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{graphics/pidwindupresponse}
+		\caption{PID controller}
+		\label{fig:pidwindupresponse}
+	\end{subfigure}
+	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+	%(or a blank line to force the subfigure onto a new line)
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{graphics/ipdwindupresponse}
+		\caption{IPD controller}
+		\label{fig:ipdwindupresponse}
+	\end{subfigure}
+	\caption{Responses of controllers with (yellow line) and without (blue line) anti-windup strategy.}\label{fig:antiwindupresponses}
+\end{figure}
+
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.75\linewidth]{graphics/pidwindupvaluecomp}
+	\caption{PID behaviour with different anti-windup gain: 10000 (blue line) and 10 (yellow line).}
+	\label{fig:pidwindupvaluecomp}
 \end{figure}
 
 \subsection{Controller Gain Design}
