@@ -105,9 +105,14 @@ The derivative part of the PID controller will try to reduce every sudden change
 
 \subsection{Anti-Windup Design}
 
-During the function of the controller, there is a possibility that it will operate in a nonlinear region where increasing the control signal has no effect on the system output. This introduces time delay to the response of the system, thus reducing its overall performance. This behaviour can be counteracted using an anti-windup strategy such as the one in figure. The gain K can be chosen doing experiments using trial and error.
+During the function of the controller, there is a possibility that it will operate in a nonlinear region where increasing the control signal has no effect on the system output. This introduces time delay to the response of the system, thus reducing its overall performance. This behaviour can be counteracted using an anti-windup strategy such as the one in figure~\ref{fig:ipdantiwindupstrategy}. The gain K can be chosen doing experiments using trial and error.
 
-
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.9\linewidth]{graphics/ipdwindupdesign}
+	\caption{Block diagram of the IPD controller with anti-windup strategy}
+	\label{fig:ipdantiwindupstrategy}
+\end{figure}
 
 \subsection{Controller Gain Design}
 
@@ -161,31 +166,15 @@ d_1 &= a_0 + b_0 K_P = 3\alpha^2
 d_2 &= a_1 + b_0 K_D = 3\alpha
 \end{align}
 
-<<<<<<< HEAD
 Solving the above equations using the parameters and $T_s=10ms$, the gains receive the values:
-\begin{align}
-=======
-Solving the above equations using the parameters and $T_s=0.2$, the gains receive the values:
 \begin{align*}
->>>>>>> 19ead6d32da4b4b5cd80b3203356af13b844af45
 \label{eq:gainsvaluesfull}
 K_I &= 62.3855
 \\
 K_P &= 0.2752
 \\
-<<<<<<< HEAD
 K_D &= 1.7910\cdot10^{-4}
-\end{align}
-\todo{calculate the gains with the parameters when they become available!}
-=======
-K_D &= 
-<<<<<<< HEAD
 \end{align*}
-=======
-\end{align}
-\todo{calculate the gains!}
->>>>>>> 6a0c937128d3ad00f0b2af75b45d1412d381683c
->>>>>>> 19ead6d32da4b4b5cd80b3203356af13b844af45
 
 
 \subsubsection{Reduced Order Systems}
@@ -199,20 +188,14 @@ H(s) = \dfrac{b_0(K_Ps + K_I)}{s^2 + (a_0 + b_0 K_P)s + b_0 K_I }
 
 Matching the characteristic equation with the standard form and looking at the table~\ref{table:coefsettlingtime}, the coefficients become:
 
-\begin{align}
+\begin{align*}
 \label{eq:pimatchingcoef}
 d_0 &= b_0 K_I = \alpha^2
 \\
 d_1 &= a_0 + b_0 K_P = 2\alpha
-\end{align}
+\end{align*}
 
 Similarly, using the parameters and $T_s=10ms$, the gains in this case are:
 
-\begin{align}
-\label{eq:gainsvaluesreduced}
-K_I &= 
-\\
-K_P &= 
-\end{align}
 \todo{calculate the gains here too!}
 
