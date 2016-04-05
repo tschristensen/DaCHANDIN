@@ -192,6 +192,7 @@ As can be seen, the slope, and therefore the values of $K_v$ are nearly identica
 A reasonable explanation for this inconsistency has yet to be devised.
 
 \subsection{Motor inductance - $L_a$}
+\label{sec:incuctance}
 \paragraph{Method I}~\\
 The inductance of the motor, $L_a$ in figure \ref{fig:dcmotormodel}, can be found by looking at the transient response of the stalled motor. 
 When the motor is stalled there is no back-EMF in the circuit. The motor can then be modelled as a simple RL-circuit. 
@@ -225,8 +226,7 @@ The average value of $L_a$ was then found to be 2.6 mH. The value is only $3.83\
 \subsubsection{Discussion}
 Only the voltage across $R_e$ is measured, which is problematic as it is assumed in the formula that the transient response is measured across the whole resistance of the circuit. Choosing a value for $R_e$ that is much larger than $R_a$ would minimize the problem.
 The experiment was done with values of $R_e$ ranging from $33\Omega$ to $3.3K\Omega$.
-Results generally showed that higher values of $R_e$ yielded more difference between the calculated values of $L_a$ and the value given in the datasheet.
-
+Results generally showed that higher values of $R_e$ yielded more difference between the calculated values of $L_a$ and the value given in the datasheet.	
 
 
 \paragraph{Method II}~\\
@@ -237,7 +237,10 @@ Given that there is no back-EMF the motor can be accurately modelled as an RL-ci
 In the first half period the RL-circuit would experience a postive voltage step. 
 The voltage step across the inductor will produce a change in current.
 This change in current can then be used to calculate the inductance of the motor.
-The elemental equation for the inductor can easily be rewritten to reveal the inductance when the duty cycle, D, the voltage, V, the change in current, $\Delta i$, and the time period, T, are knwon. 
+The change in current will produce a change in the voltage across the resistor.
+This change in voltage cannot be measured as the resistance is in the inductor, but as long as the current ripple is small the effect is negligible. 
+In order to have a small current ripple the frequency cannot be too small.   
+The elemental equation for the inductor can easily be rewritten to reveal the inductance when the duty cycle, D, the voltage, V, the change in current, $\Delta i$, and the time period, T, are known. 
 $$V = L \frac{di}{dt} \Rightarrow \Delta i = \frac{1}{L} \cdot D \cdot T \cdot V $$
 $$L = \frac{D \cdot T \cdot V}{\Delta i}$$
 
@@ -253,26 +256,26 @@ A plot of the current and voltage at 30kHz can be seen in figure \ref{fig:half_d
 	\label{fig:half_duty}
 \end{figure}
 
-Z experiments were done with frequencies varying from yKHz to xKHz.
+25 experiments were done with frequencies varying from 2kHz to 50kHz.
 All data was measured on an oscilloscope and used to calculate the inductance at each frequency.
 A plot of the inductance as a function of the frequency can be seen in figure \ref{fig:inductance_freq}.
+It can be seen that the voltage change due to the current ripple is negligible as it is not observable.
 
-\todo[inline]{MAKE MORE EXPERIMENTS MIKKEL.}
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.75\linewidth]{graphics/l_freq}
-	\caption{Incuctance as a function of frequency. The horizontal line represents the mean value of the inductance measured at frequencies above $25kHz$.}
+	\caption{Inductance as a function of frequency. The horizontal line represents the mean value of the inductance measured at frequencies between 25kHz and 35kHz.}
 	\label{fig:inductance_freq}
 \end{figure}
 
 It can be seen quite easily that the inductance is not a constant, but it is varying with frequency. 
-At frequencies above 25kHz it seems that it is somewhat constant. 
-The  motor needs to be run at frequencies above 25kHz to be out of the audible range. 
-Therefore the mean value of all calculated inductances measured at above 25kHz is a good aproximation of the experienced inductance.
-The mean value is found to be XX and is shown in figure \ref{fig:inductance_freq} by a horizontal line.
-The mean value of the inductance is XX $\%$ higher than inductance given in the datasheet.	
+The motor will be run at frequencies above 25kHz to be out of the audible range and below 35kHz to avoid too much switching loss. 
+Therefore the mean value of all calculated inductances measured between 25kHz and 35kHz is a good aproximation of the experienced inductance.
+The mean value is found to be 21mH and is shown in figure \ref{fig:inductance_freq} by a horizontal line.
+The mean value of the inductance is 17.7 $\%$ lower than inductance given in the datasheet.	
 
 \subsection{Motor Inertia - $J_r$}
+\label{sec:inertia}
 The inertia of the motor, $J_r$ in figure \ref{fig:dcmotormodel}, can be found by looking at the transient response of the motor. 
 It is known from \cite{feedback}, that the inertia of a motor can be calculed by the following equation.
 $$J_m = (K_{fm}+\frac{K_m^2}{R_a}) \cdot T$$
@@ -295,12 +298,11 @@ Step inputs of 1V, 2V, 3V,\dots 10V was used and 5 datasets were collected at ea
 	\label{fig:inertia_trans_plot}
 \end{figure}
 
-With a step input of 7V and using the measured values for $K_{fm}$,$R_a$ and $K_m$ the mean value of $i_a(T)$ was calculated to be 0.88 I. 
+With a step input of 7V and using the measured parameters, with the least deviation, for $K_{fm}$,$R_a$ and $K_m$ the mean value of $i_a(T)$ was calculated to be 0.88 I. 
 The mean value of T was then found to be 0.015 s and lastly the mean value of $J_r$, with a step input of 7V, was found to be $6.54 \cdot 10^{-6} \cdot kg \cdot m^2$.
 
 \par
-The mean value of $J_r$ from all the experiments with varying step input value was found to be $ 6.508 \cdot 10^{-6} \cdot kg \cdot m^2$ which is $56\%$ higher than the value given in the datasheet. 
-\todo[inline]{Mikkel. Recalculate all values with the measured values of Ra, Kfm and so on, remember values in table!}
+The mean value of $J_r$ from all the experiments with varying step input value was found to be $ 6.06 \cdot 10^{-6} \cdot kg \cdot m^2$ which is $45.4\%$ higher than the value given in the datasheet. 
 
 \subsection{Comparison - Conclusion}
 Throughout this section the experiments used to determine the various parameters of the Pittmann 9324 have been presented.
@@ -314,8 +316,22 @@ However, two methods have yielded approximately the same result which leads to t
 	No evidence has been seen that this would be the case.
 \end{enumerate}
 At this time, no reasonable explanation for this deviation has been found.
+
+\par
 The voltage constant, $K_e$ found in section \ref{sec:voltconstat} is significantly closer to the given value and is easily acceptable.
+
+\par
 Similarly, when accounting for the coulomb friction and static friction the viscous damping factor found in section \ref{sec:viscous} is very close to the given value.
+
+\par
+Two methods were used in section \ref{sec:incuctance} for finding the inductance of the motor.
+Method I showed a value close to given value, but the found values seemed to depend on the choosen size of $R_e$ although no explanation to this were found. 
+Method II showed a dependency of frequency and the mean value of incductance between 25kHz and 35kHz was found to be quite large compared to the datasheet.
+
+\par
+In section \ref{sec:inertia} the inertia of the motor was found using the measured transient response of the system.
+The found value deviates from the datasheet value quite a lot. 
+This could be partly due to the use of measured parameters in the calculation.
 
 \begin{table}
 	\centering
@@ -326,8 +342,8 @@ Similarly, when accounting for the coulomb friction and static friction the visc
 		$R_a$ [$\Omega$] (M1/M2) & 2.96 & 3.647/3.715 & 23.21\%/25.51\%\\
 		$K_e$ [$V\cdot\frac{S}{Rad}$]& 0.0365 & 0.036 & 1.37\%\\
 		$K_v$ [$Nm\cdot\frac{S}{Rad}$]& $2.6\cdot10^{-6}$ & $2.611\cdot10^{-6}$ & 0.42\%\\
-		$L_a$ [$mH$]& 2.51 & 2.6 & 3.59\%\\
-		$J_r$ [$kg\cdot m^2$]& $4.2\cdot10^{-6}$& $6.508\cdot10^{-6}$ & 54.95\%\\
+		$L_a$ [$mH$] (M1/M2)& 2.51 & 2.6/2.1 & 3.59\% / 17.7\%\\
+		$J_r$ [$kg\cdot m^2$]& $4.2\cdot10^{-6}$& $6.06 \cdot10^{-6}$ & 45.4\%\\
 		\hline
 	\end{tabular}
 	\caption[Comparison of parameter values.]{Comparison between the parameter values of the Pittmann 9324 given in the datasheet and the values found by experimentation. The final column shows the percentage-wise deviation between the two values.}

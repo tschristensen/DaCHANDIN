@@ -2,9 +2,9 @@ clear;clc;close;
 !synclient HorizTwoFingerScroll=0
  
 vass = 7;           % Changed between the experiments
-kfm = 2.62e-6;      % Should be the found value - GET FROM THOMAS
-km = 0.036;         % Should be the found value - GET FROM THOMAS
-Ra = 2.96;          % Should be the found value - GET FROM THOMAS
+kfm = 2.611e-6;      % Should be the found value 
+km =0.036;         % Should be the found value 
+Ra = 3.647;          % Should be the found value
 
 ia_T = (kfm * Ra + km^2 * exp(-1))/(kfm * Ra + km^2) * vass/Ra;
 
@@ -65,17 +65,16 @@ T= mean_t_ia_T;
 jm = ((kfm + km^2)/Ra)*T
 
 %Calculated by running this script on the data
-%RECALCULATE ALL OF THEM WITH THE MEASURED DATA FOR Ra and so on
-jm(1) = 8.0978e-06;
-jm(2) = 6.6683e-06;
-jm(3) = 6.4596e-06;
-jm(4) = 6.0624e-06;
-jm(5) = 6.2962e-06;
-jm(6) = 6.0474e-06;
-jm(7) = 6.5448e-06;
-jm(8) = 6.5224e-06;
-jm(9) = 6.2149e-06;
-jm(10) = 6.1698e-06;
+jm(1) = 7.9668e-06;
+jm(2) = 6.3002e-06;
+jm(3) = 6.1315e-06;
+jm(4) = 5.7624e-06;
+jm(5) = 5.8636e-06;
+jm(6) = 5.8233e-06;
+jm(7) = 5.7379e-06;
+jm(8) = 5.7040e-06;
+jm(9) = 5.6217e-06;
+jm(10) = 5.7230e-06;
 
 
 mean_jm_all_voltages = mean(jm)
