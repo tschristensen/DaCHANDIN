@@ -10,7 +10,10 @@
 \usepackage{pdfpages} 		%Utility to include pdf documents into the report, used to include datasheets in appendices.
 \usepackage{tikz} 			%Utility to draw nice figures
 \usepackage{circuitikz} 	%Utility to draw circuits in tikz
-\usetikzlibrary{shapes, arrows, chains, scopes}
+\usetikzlibrary{shapes, arrows, chains, scopes, positioning}
+
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, minimum height=3em, minimum width=6em]
+\tikzstyle{blockg} = [draw, fill=green!20, rectangle, minimum height=3em, minimum width=6em]
 
 \usepackage{todonotes}
 \usepackage{listings}
@@ -48,6 +51,8 @@
 \clearpage
 \newpage
 \input{sections/introduction}
+\newpage
+\input{sections/implementation}
 \newpage
 \input{sections/parameterisation}
 \newpage
