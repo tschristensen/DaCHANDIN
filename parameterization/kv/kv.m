@@ -26,7 +26,7 @@ fitted = fit1.Fitted;
 figure('Position',[100,100,fig_x,fig_y])
 plot(w*(2*pi/60),Tv_actual,'g',w(48:end)*(2*pi/60), fitted,'-r',w*(2*pi/60),Te,'-bo')
 grid on
-legend('Coloumb Friction, actual','Fitted Line','Data Points', 'Location', 'northwest')
+legend('T_c+T_v, actual','Fitted Line','Data Points', 'Location', 'northwest','interpreter','LaTex')
 title('Torque as a Function of Angular Velocity')
 xlabel('Angular Velocity [$\frac{Rad}{S}$]','interpreter','LaTex')
 ylabel('Torque [$Nm$]','interpreter','LaTex')
