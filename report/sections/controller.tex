@@ -1,17 +1,21 @@
 \section{Controller}
 \label{sec:controller}
 
+<<<<<<< HEAD
 \todo{PUT DOTS AT the end of figures' sentences}
 
 To control the speed of the DC motor a controller will have to be implemented to the system. 
 A block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. 
 From the block diagram the transfer function, $P(s)$, of the motor can be derived as seen in equation~\ref{eq:fullplant}.
 $P(s)$ is rearranged to coincide with the form in equation~\ref{eq:simpleplant}.
+=======
+To control the speed of the DC motor a controller will have to be implemented in to the system. A block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. From the block diagram a transfer function $P(s)$ for the motor can be derived as seen in equation~\ref{eq:fullplant} on the form in equation~\ref{eq:simpleplant}.
+>>>>>>> b3935318619a7d2c57273ba6e553780724dc05a1
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=.75\linewidth]{graphics/dcblockdiagram}
-	\caption{A block diagram of the DC motor}
+	\includegraphics[width=1\linewidth]{graphics/dcblockdiagram}
+	\caption{A block diagram of the full order DC motor.}
 	\label{fig:dcblock}
 \end{figure}
 
@@ -39,7 +43,7 @@ P(s) = \dfrac{b_0}{s^2 + a_1 s + a_0}
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.75\linewidth]{graphics/controlsystem}
-	\caption{Block diagram of the PID control system}
+	\caption{Block diagram of the PID control system. The plant represents the dc motor}
 	\label{fig:pidcontrolsystem}	
 \end{figure}
 
@@ -62,7 +66,7 @@ A block diagram for the PID controller can be seen in figure~\ref{fig:pidblock} 
 C(s) = K_P + \dfrac{K_I}{s} +K_D s
 \end{equation}
 
-Inserting the transfer functions $C(s)$ and $P(S)$ into the transfer function $H(s)$ and rearranging it, $H(s)$ becomes the equation~\ref{eq:pidfulltf}. On the new form, the denominator describes the poles of the system and is called the characteristic equation.
+Inserting the transfer functions $C(s)$ and $P(S)$ into the transfer function $H(s)$ and rearranging it, $H(s)$ becomes equation~\ref{eq:pidfulltf}. On this form, the denominator describes the poles of the system. The denominator is the systems characteristic equation.
 
 \begin{equation}
 \label{eq:pidfulltf}
@@ -71,16 +75,16 @@ H(s) = \dfrac{b_0 (K_D s^2 + K_P s K_I)}{s^3 + (a_1 + b_0 K_D)s^2 (a_0 + b_0 K_P
 
 
 \subsection{IPD controller}
-An equivalent setup to the PID controller is the IPD controller, which does not introduce zeros to the system. It still uses the same gains (proportional, integral and derivative gain) and due to its design, eliminates overshoots as well as undershoots.
+An equivalent setup to the PID controller is the IPD controller, which does not introduce zeros to the system. It still uses the same gains, proportional, integral and derivative gains.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=.85\linewidth]{graphics/ipdcontroller}
-	\caption{Block diagram of the IPD control system}
+	\includegraphics[width=1\linewidth]{graphics/ipdcontroller}
+	\caption{Block diagram of the IPD control setup}
 	\label{fig:ipdcontrolsystem}	
 \end{figure}
 
-Due to no zeros to the overall system, the transfer function of the IPD controller system becomes as seen in the equation~\ref{eq:tfipdsystem}.
+The transfer function of the IPD controller system becomes as seen in equation~\ref{eq:tfipdsystem}. The transfer functions $P(s)$ and $C(s)$ are the same as in equation~\ref{eq:tfpidsystem}. It is noticed that the transfer function indeed introduces no zeros to the system.
 
 \begin{equation}
 \label{eq:tfipdsystem}
@@ -119,15 +123,14 @@ During the function of the controller, there is a possibility that it will opera
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=.9\linewidth]{graphics/ipdwindupdesign}
-	\caption{Block diagram of the IPD controller with anti-windup strategy}
+	\includegraphics[width=1\linewidth]{graphics/ipdwindupdesign}
+	\caption{Block diagram of the IPD controller with anti-windup design}
 	\label{fig:ipdantiwindupstrategy}
 \end{figure}
 
-As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces smoother behaviour into the system. The gain $K$ is the one that determines that behaviour and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in the figure~\ref{fig:pidwindupvaluecomp}.
+As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces smoother behavior into the system. The gain $K$ is the one that determines that behavior and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in figure~\ref{fig:pidwindupvaluecomp}.
 
-One major disadvantage of implementing such a strategy is that the settling time suffers for low values such as $T_s=0.01$, but not for $T_s=0.1$ as it can be seen in figure. 
-\todo{update the windup resonse graphs!}
+One major disadvantage of implementing such a strategy is that the settling time suffers for as can be seen in figure~\ref{fig:antiwindupresponses} where the desired settling time of $T_s$ = 0.01 is giving an error of approximately 55\%. 
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
@@ -142,24 +145,30 @@ One major disadvantage of implementing such a strategy is that the settling time
 		\caption{IPD controller}
 		\label{fig:ipdwindupresponse}
 	\end{subfigure}
-	\caption{Responses of controllers without (yellow line) and with (blue line) anti-windup strategy.}\label{fig:antiwindupresponses}
+	\caption{Responses of controllers without and with anti-windup design.}\label{fig:antiwindupresponses}
 \end{figure}
 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=.75\linewidth]{graphics/pidwindupvaluecomp}
-	\caption{PID behaviour with different anti-windup gain: 10000 (blue line) and 10 (yellow line).}
+	\includegraphics[width=.6\linewidth]{graphics/pidwindupvaluecomp}
+	\caption{PID behaviour with different anti-windup gain. The higher gain being 10000 while the lower is 10.}
 	\label{fig:pidwindupvaluecomp}
 \end{figure}
+<<<<<<< HEAD
 \todo{Make white scope shots.}
 \todo{The graph pidwindupvaluecomp must have K = 10 and K = 10000 instead!}
+=======
+
+>>>>>>> b3935318619a7d2c57273ba6e553780724dc05a1
 
 \subsection{Controller Gain Design}
+The controller gains are then to be designed. To achieve that the settling time method will be introduced~\cite{feedback}.
+
 
 \subsubsection{Settling Time Formula}
 
-The equation~\ref{eq:settling} is used for the desired response to enter the 5$\%$ error band within the given settling time.
+The equation~\ref{eq:settling} is used for the desired response to enter the 5$\%$ error band within a desired settling time of $T_s$ and $n$ being the order of the controller.
 \begin{equation}
 \centering
 \label{eq:settling}
@@ -189,7 +198,7 @@ The equation~\ref{eq:settling} is used for the desired response to enter the 5$\
 
 \subsubsection{Full Order Systems}
 
-As the equations~\ref{eq:pidfulltf} and~\ref{eq:ipdfulltf} show, their denominator is in the standard form~\ref{eq:stdchararacteristic}. The coefficients from the characteristic equations can easily be matched with the ones from the standard form as shown in~\ref{eq:pidmatchingcoef} together with the coefficients table~\ref{table:coefsettlingtime} where the order of the system in this case is $n=3$.
+As the equations~\ref{eq:pidfulltf} and~\ref{eq:ipdfulltf} show, their denominator is in the standard form of equation~\ref{eq:stdchararacteristic}. To calculate the controller gains the characteristic equation is compared to the coefficients in table~\ref{table:coefsettlingtime} where the order of the system in this case is $n=3$. The gain equations for $K_I, K_P$ and $K_D$ can be seen in equations~\ref{eq:pidki},~\ref{eq:pidkp} and~\ref{eq:pidkd} respectively. 
 
 
 \begin{equation}
@@ -199,17 +208,18 @@ s^n + d_{n-1}s^{n-1} + \cdots + d_1 s + d_0
 \end{equation}
 
 \begin{align}
-\label{eq:pidmatchingcoef}
+\label{eq:pidki}
 d_0 &= b_0 K_I = \alpha^3
 \\
+\label{eq:pidkp}
 d_1 &= a_0 + b_0 K_P = 3\alpha^2
 \\
+\label{eq:pidkd}
 d_2 &= a_1 + b_0 K_D = 3\alpha
 \end{align}
 
-Solving the above equations using the parameters and $T_s=10ms$, the gains receive the values:
+Solving the above equations using the parameters and $T_s$ = 10~ms, the gains receive the values:
 \begin{align*}
-\label{eq:gainsvaluesfull}
 K_I &= 62.3855
 \\
 K_P &= 0.2752
@@ -217,26 +227,49 @@ K_P &= 0.2752
 K_D &= 1.7910\cdot10^{-4}
 \end{align*}
 
+And again for a settling time $T_s$ = 100~ms
+
+\begin{align*}
+K_I &= 0.0945
+\\
+K_P &= -0.0315
+\\
+K_D &= -5.3532\cdot10^{-4}
+\end{align*}
+
 
 \subsubsection{Reduced Order Systems}
 
-In the case of a reduced order system, the controller derivative's gain is equal to zero, and the transfer function takes the form of equation~\ref{eq:pireducedtf}.
+In the case of a reduced order system, the controller derivative's gain is equal to zero and the inductance of the motor $L_a$ is not taken into the calculations. The reduced transfer function takes the form of equation~\ref{eq:pireducedtf}.
 
 \begin{equation}
 \label{eq:pireducedtf}
 H(s) = \dfrac{b_0(K_Ps + K_I)}{s^2 + (a_0 + b_0 K_P)s + b_0 K_I }
 \end{equation}
 
-Matching the characteristic equation with the standard form and looking at the table~\ref{table:coefsettlingtime}, the coefficients become:
+Matching the characteristic equation with the standard form and looking at the coefficients in table~\ref{table:coefsettlingtime}, the equations for the controller gains, $K_i$ and $K_p$ become as seen in equations~\ref{eq:piki} and~\ref{eq:pikp} respectively.
 
-\begin{align*}
-\label{eq:pimatchingcoef}
+\begin{align}
+\label{eq:piki}
 d_0 &= b_0 K_I = \alpha^2
 \\
+\label{eq:pikp}
 d_1 &= a_0 + b_0 K_P = 2\alpha
-\end{align*}
+\end{align}
 
 Similarly, using the parameters and $T_s=10ms$, the gains in this case are:
 
-\todo{calculate the gains here too!}
-
+\begin{align*}
+K_I &= 221
+\\
+K_P &= 0.7
+\end{align*}
+ 
+ and again for the settling time of $T_s$ = 100ms
+ 
+ \begin{align*}
+ K_I &= 2.2101
+ \\
+ K_P &= 0.0374
+ \end{align*}
+ 

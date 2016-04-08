@@ -10,6 +10,11 @@
 \usepackage{pdfpages} 		%Utility to include pdf documents into the report, used to include datasheets in appendices.
 \usepackage{tikz} 			%Utility to draw nice figures
 \usepackage{circuitikz} 	%Utility to draw circuits in tikz
+
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\counterwithin{equation}{section}
+
 \usetikzlibrary{shapes, arrows, chains, scopes, positioning}
 
 \tikzstyle{block} = [draw, fill=blue!20, rectangle, minimum height=3em, minimum width=6em]
@@ -57,6 +62,8 @@
 \input{sections/parameterisation}
 \newpage
 \input{sections/controller}
+\newpage
+\input{sections/simulation}
 \newpage
 \input{sections/performance}
 \newpage
