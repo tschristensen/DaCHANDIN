@@ -1,9 +1,12 @@
-\section{Controlling}
+\section{Controller}
 \label{sec:controller}
 
 \todo{PUT DOTS AT the end of figures' sentences}
 
-To control the speed of the DC motor a controller will have to be implemented in to the system. A block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. From the block diagram a transfer function $P(s)$ for the motor can be derived as seen in equation~\ref{eq:fullplant} on the form in equation~\ref{eq:simpleplant}.
+To control the speed of the DC motor a controller will have to be implemented to the system. 
+A block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. 
+From the block diagram the transfer function, $P(s)$, of the motor can be derived as seen in equation~\ref{eq:fullplant}.
+$P(s)$ is rearranged to coincide with the form in equation~\ref{eq:simpleplant}.
 
 \begin{figure}[!h]
 	\centering
@@ -25,9 +28,13 @@ P(s) = \dfrac{b_0}{s^2 + a_1 s + a_0}
 
 
 \subsection{PID controller}
- A commonly used controller is the PID controller\cite{feedback}. The name comes from its three adjustable parameters, the proportional gain $K_{P}$, integral gain $K_{I}$ and the derivative gain $K_{D}$. Reason for its popularity is the wide range of operating conditions as well being relatively easy to understand. 
+ A commonly used controller is the PID controller\cite{feedback}. 
+ The name comes from its three adjustable parameters, the proportional gain $K_{P}$, integral gain $K_{I}$ and the derivative gain $K_{D}$. 
+ The reason for its popularity is the wide range of operating conditions as well as being relatively easy to understand. 
  
- The controller is placed at the input of the motor monitoring the output through a feedback. the system is shown in figure~\ref{fig:pidcontrolsystem} where the plant is the DC motor. The transfer function $H(s)$ of the system is shown in equation~\ref{eq:tfpidsystem} where $C(s)$ is the transfer function of the controller.
+ The controller is placed at the input of the motor, monitoring the output through a feedback. 
+ The system is shown in figure \ref{fig:pidcontrolsystem} where the plant is the DC motor. 
+ The transfer function $H(s)$ of the system is shown in equation~\ref{eq:tfpidsystem} where $C(s)$ is the transfer function of the controller.
 
 \begin{figure}[!h]
 	\centering
@@ -145,7 +152,7 @@ One major disadvantage of implementing such a strategy is that the settling time
 	\caption{PID behaviour with different anti-windup gain: 10000 (blue line) and 10 (yellow line).}
 	\label{fig:pidwindupvaluecomp}
 \end{figure}
-
+\todo{Make white scope shots.}
 \todo{The graph pidwindupvaluecomp must have K = 10 and K = 10000 instead!}
 
 \subsection{Controller Gain Design}
