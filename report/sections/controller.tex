@@ -118,8 +118,9 @@ During the function of the controller, there is a possibility that it will opera
 \end{figure}
 
 As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces smoother behaviour into the system. The gain $K$ is the one that determines that behaviour and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in the figure~\ref{fig:pidwindupvaluecomp}.
-\todo{CHECK if PID K = 10 and IPD K = 10000 is true and correct!!!}
 
+One major disadvantage of implementing such a strategy is that the settling time suffers for low values such as $T_s=0.01$, but not for $T_s=0.1$ as it can be seen in figure. 
+\todo{update the windup resonse graphs!}
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
@@ -134,7 +135,7 @@ As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces sm
 		\caption{IPD controller}
 		\label{fig:ipdwindupresponse}
 	\end{subfigure}
-	\caption{Responses of controllers with (yellow line) and without (blue line) anti-windup strategy.}\label{fig:antiwindupresponses}
+	\caption{Responses of controllers without (yellow line) and with (blue line) anti-windup strategy.}\label{fig:antiwindupresponses}
 \end{figure}
 
 
@@ -144,6 +145,8 @@ As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces sm
 	\caption{PID behaviour with different anti-windup gain: 10000 (blue line) and 10 (yellow line).}
 	\label{fig:pidwindupvaluecomp}
 \end{figure}
+
+\todo{The graph pidwindupvaluecomp must have K = 10 and K = 10000 instead!}
 
 \subsection{Controller Gain Design}
 

@@ -1,0 +1,39 @@
+%!TEX root = ../main.tex
+
+%\documentclass{standalone}
+
+%\usepackage{tikz}
+
+% The block diagram code is probably more verbose than necessary
+\begin{tikzpicture}[auto, node distance=3.5cm,>=latex']
+    % We start by placing the blocks
+    \node [block] (motor) {Motors};
+    \node [block, left of=motor] (hbro) {H-bridge};
+    \node [block, left of=hbro] (dspace) {dSPACE};
+    \node [block, right of=motor] (encoder) {Encoders};
+    \node [below= 1cm of motor] (point) {};
+    \node [above= 1cm of motor] (point1) {};
+    \node [blockg, right =0.5cm of point1] (scope) {Oscilloscope};
+    \node [blockg, left =0.5cm of point1] (multi) {Multimeter};
+
+
+    \draw[->] (hbro) -- (motor);
+    \draw[->] (dspace) -- (hbro);
+    \draw[->] (motor) -- (encoder);
+    \draw[->] (motor) -- (encoder);
+    \draw[-] (encoder) |- (point.west);
+    \draw[->] (point) -| (dspace);
+    \draw[->] (motor) |- (scope);
+    \draw[->] (motor) |- (multi);
+
+
+  %\node[label=above:C] (C)  [below right=0.7cm and 4cm of B1]
+   %    {($2m-1$)};
+    %\draw [draw,->] (input) -- node {$r$} (sum);
+    %\draw [->] (sum) -- node {$e$} (controller);
+    %\draw [->] (system) -- node [name=y] {$y$}(output);
+    %\draw [->] (y) |- (measurements);
+\end{tikzpicture}
+
+%\end{document}
+
