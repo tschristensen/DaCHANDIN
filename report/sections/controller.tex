@@ -1,16 +1,9 @@
-\section{Controller}
+\section{Designing a controller}
 \label{sec:controller}
 
-<<<<<<< HEAD
 \todo{PUT DOTS AT the end of figures' sentences}
 
-To control the speed of the DC motor a controller will have to be implemented to the system. 
-A block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. 
-From the block diagram the transfer function, $P(s)$, of the motor can be derived as seen in equation~\ref{eq:fullplant}.
-$P(s)$ is rearranged to coincide with the form in equation~\ref{eq:simpleplant}.
-=======
-To control the speed of the DC motor a controller will have to be implemented in to the system. A block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. From the block diagram a transfer function $P(s)$ for the motor can be derived as seen in equation~\ref{eq:fullplant} on the form in equation~\ref{eq:simpleplant}.
->>>>>>> b3935318619a7d2c57273ba6e553780724dc05a1
+To control the speed of the DC motor a controller will have to be implemented to the system. A block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. From the block diagram the transfer function $P(s)$ of the motor can be derived as seen in equation~\ref{eq:fullplant}.$P(s)$ is rearranged to coincide with the form in equation~\ref{eq:simpleplant}. From the block diagram a transfer function $P(s)$ for the motor can be derived as seen in equation~\ref{eq:fullplant} on the form in equation~\ref{eq:simpleplant}.\todo{During pull, this paragraph was messed up. I fixed it, but all of you take a look at it just in case to see if it's ok.}
 
 \begin{figure}[!h]
 	\centering
@@ -32,18 +25,18 @@ P(s) = \dfrac{b_0}{s^2 + a_1 s + a_0}
 
 
 \subsection{PID controller}
- A commonly used controller is the PID controller\cite{feedback}. 
+ A commonly used controller is the PID controller~\cite{feedback}. 
  The name comes from its three adjustable parameters, the proportional gain $K_{P}$, integral gain $K_{I}$ and the derivative gain $K_{D}$. 
  The reason for its popularity is the wide range of operating conditions as well as being relatively easy to understand. 
  
  The controller is placed at the input of the motor, monitoring the output through a feedback. 
- The system is shown in figure \ref{fig:pidcontrolsystem} where the plant is the DC motor. 
+ The system is shown in figure~\ref{fig:pidcontrolsystem} where the plant is the DC motor. 
  The transfer function $H(s)$ of the system is shown in equation~\ref{eq:tfpidsystem} where $C(s)$ is the transfer function of the controller.
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.75\linewidth]{graphics/controlsystem}
-	\caption{Block diagram of the PID control system. The plant represents the dc motor}
+	\caption{Block diagram of the PID control system. The plant represents the DC motor.}
 	\label{fig:pidcontrolsystem}	
 \end{figure}
 
@@ -66,7 +59,7 @@ A block diagram for the PID controller can be seen in figure~\ref{fig:pidblock} 
 C(s) = K_P + \dfrac{K_I}{s} +K_D s
 \end{equation}
 
-Inserting the transfer functions $C(s)$ and $P(S)$ into the transfer function $H(s)$ and rearranging it, $H(s)$ becomes equation~\ref{eq:pidfulltf}. On this form, the denominator describes the poles of the system. The denominator is the systems characteristic equation.
+Inserting the transfer functions $C(s)$ and $P(S)$ into the transfer function $H(s)$ and rearranging it, $H(s)$ becomes equation~\ref{eq:pidfulltf}. On this form, the denominator describes the poles of the system. The denominator is the system's characteristic equation.
 
 \begin{equation}
 \label{eq:pidfulltf}
@@ -75,7 +68,7 @@ H(s) = \dfrac{b_0 (K_D s^2 + K_P s K_I)}{s^3 + (a_1 + b_0 K_D)s^2 (a_0 + b_0 K_P
 
 
 \subsection{IPD controller}
-An equivalent setup to the PID controller is the IPD controller, which does not introduce zeros to the system. It still uses the same gains, proportional, integral and derivative gains.
+An equivalent setup to the PID controller is the IPD controller, which does not introduce zeros to the system. It still uses the same gains, proportional, integral and derivative.
 
 \begin{figure}[!h]
 	\centering
@@ -91,7 +84,7 @@ The transfer function of the IPD controller system becomes as seen in equation~\
 H(s) = \dfrac{\dfrac{K_I}{s} P(s)}{1+C(s)P(s)}
 \end{equation}
 
-With insertion and rearranging, the transfer function $H(s)$ takes the form of equation~\ref{eq:ipdfulltf}. Now it can be seen that indeed the IPD controller does not introduce any zeros to the system and the characteristic equation is same as the one for the PID controller. Thus the same controller gains can be used in both cases.
+With insertion and rearranging, the transfer function $H(s)$ takes the form of equation~\ref{eq:ipdfulltf}. Now it can be seen that indeed the IPD controller does not introduce any zeros to the system and the characteristic equation is the same as the one for the PID controller. Thus the same controller gains can be used in both cases.
 
 \begin{equation}
 \label{eq:ipdfulltf}
@@ -100,7 +93,7 @@ H(s) = \dfrac{b_0 K_I}{s^3 + (a_1 + b_0 K_D)s^2 (a_0 + b_0 K_P)s + b_0 K_I }
 
 \subsection{Noise Filtering}
 
-The derivative part of the PID controller will try to reduce every sudden change in the system. This is what helps the system stop oscillating. However, when noise is introduced to the system, the derivative term acts on the fast, sudden change and can destabilize the system. In other words, the derivative term can and will increase the noise. For this reasons a low pass filter is needed on the derivative path. This is done with changing $s$ on the derivative gain to $N/(s + N)$ where $N$ is $1/T_f$ and $T_f$ is the filter time constant and N is the cut off frequency. The block diagram for the controllers then become as seen in figures~\ref{fig:pidfilter} and~\ref{fig:ipdfilter} respectively.
+The derivative part of the PID controller will try to reduce every sudden change in the system. This is what helps the system stop oscillating. However, when noise is introduced into the system, the derivative term acts on the fast, sudden change and can destabilize the system. In other words, the derivative term can and will increase the noise. For this reason a low pass filter is needed on the derivative path. This is done with changing $s$ on the derivative gain to $N/(s + N)$ where $N$ is $1/T_f$ and $T_f$ is the filter time constant and N is the cut off frequency. The block diagram for the controllers then become as seen in figures~\ref{fig:pidfilter} and~\ref{fig:ipdfilter} respectively.
 
 \begin{figure}[!h]
 	\centering
@@ -128,9 +121,9 @@ During the function of the controller, there is a possibility that it will opera
 	\label{fig:ipdantiwindupstrategy}
 \end{figure}
 
-As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces smoother behavior into the system. The gain $K$ is the one that determines that behavior and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in figure~\ref{fig:pidwindupvaluecomp}.
+As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces smoother behaviour into the system. The gain $K$ is the one that determines that behaviour and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in figure~\ref{fig:pidwindupvaluecomp}.
 
-One major disadvantage of implementing such a strategy is that the settling time suffers for as can be seen in figure~\ref{fig:antiwindupresponses} where the desired settling time of $T_s$ = 0.01 is giving an error of approximately 55\%. 
+One major disadvantage of implementing such a strategy is that the settling time suffers for low values. This phenomena can be seen in figure~\ref{fig:antiwindupresponses} where the desired settling time of $T_s$ = 0.01 is giving an error of approximately 55\%. 
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
@@ -162,7 +155,7 @@ The controller gains are then to be designed. To achieve that the settling time 
 
 \subsubsection{Settling Time Formula}
 
-The equation~\ref{eq:settling} is used for the desired response to enter the 5$\%$ error band within a desired settling time of $T_s$ and $n$ being the order of the controller.
+The equation~\ref{eq:settling} is used for the system's desired response to enter the 5$\%$ error band within a specified settling time of $T_s$ and $n$ being the order of the controller.
 \begin{equation}
 \centering
 \label{eq:settling}
@@ -173,7 +166,7 @@ The equation~\ref{eq:settling} is used for the desired response to enter the 5$\
 	\caption{ Coefficients of
 		closed loop differential
 		equation based on settling
-		time formula\cite{feedback}}
+		time formula~\cite{feedback}}
 	\centering
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -234,7 +227,7 @@ K_D &= -5.3532\cdot10^{-4}
 
 \subsubsection{Reduced Order Systems}
 
-In the case of a reduced order system, the controller derivative's gain is equal to zero and the inductance of the motor $L_a$ is not taken into the calculations. The reduced transfer function takes the form of equation~\ref{eq:pireducedtf}.
+In the case of a reduced order system, the controller derivative's gain is equal to zero and the inductance of the motor $L_a$ is not taken into account during the calculations. The reduced transfer function takes the form of equation~\ref{eq:pireducedtf}.
 
 \begin{equation}
 \label{eq:pireducedtf}
@@ -259,7 +252,7 @@ K_I &= 221
 K_P &= 0.7
 \end{align*}
  
- and again for the settling time of $T_s$ = 100ms
+ and again for the settling time of $T_s$ = 100ms:
  
  \begin{align*}
  K_I &= 2.2101
