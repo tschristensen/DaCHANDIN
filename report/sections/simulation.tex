@@ -1,6 +1,7 @@
+%!TEX root = ../main.tex
 \section{Simulations}
-Before the controllers can be tested on the real system a simulation must be done. The controllers that have been chosen are the IPD and PI, where PI is the PID controller with $K_D$ set to 0. Speed control is simulated at two different angular velocities, 200~rad/s and~125 rad/s. To prevent the saturation limit to be reached, the settling time is set to 0.1~ms.\todo{why settling time 0.1 and not 0.01}
-
+Before the controllers can be tested on the real system a simulation must be done. The controllers that have been chosen are the IPD and PI, where PI is the PID controller with $K_D$ set to 0. Speed control is simulated at two different angular velocities, \todo{To different step signals ? - Mikkel}200~rad/s and~125 rad/s. To prevent the saturation limit to be reached, the settling time is set to 0.1~ms.\todo{why settling time 0.1 and not 0.01}
+\todo[inline]{Why are these choosen? -Mikkel}
 \begin{figure}[h!]
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
@@ -41,7 +42,7 @@ Before the controllers can be tested on the real system a simulation must be don
 \end{figure}
 \todo{The sentence may need to be expressed again? "The desired...the controller}
 
-
+\todo[inline][We should be able to find out where the delay comes from? - Mikkel]
 The simulation confirms that the controllers behave similar for both simulated angular velocities as seen in figures~\ref{fig:pisingle} and~\ref{fig:ipdsingle}. Both the PI and IPD achieve to settle within the specified settling time. However, an unexplained delay is introduced in the beginning of the IPD controller response. That delay does not affect the system response in other way than offsetting it.
 
 \begin{figure}[h!]
