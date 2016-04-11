@@ -123,18 +123,19 @@ This behaviour can be counteracted using an anti-windup strategy such as the one
 \end{figure}
 
 As figure~\ref{fig:antiwindupresponses} shows, using this strategy eliminates the overshoot of the system. The gain $K$ is the one that determines that behaviour and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in figure~\ref{fig:pidwindupvaluecomp}.
+
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{graphics/pidwindupresponse}
-		\caption{PID controller}
+		\caption{PID controller.}
 		\label{fig:pidwindupresponse}
 	\end{subfigure}
 	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
 	%(or a blank line to force the subfigure onto a new line)
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{graphics/ipdwindupresponse}
-		\caption{IPD controller}
+		\caption{IPD controller.}
 		\label{fig:ipdwindupresponse}
 	\end{subfigure}
 	\caption{Responses of controllers without and with anti-windup design.}\label{fig:antiwindupresponses}
