@@ -1,4 +1,5 @@
 %!TEX root = ../main.tex
+\clearpage
 \section{Performance}
 This section describes the performance of the controllers created in section~\ref{sec:controller}.
 The controllers will be applied to both the real and the simulated system in order to compare the results.
@@ -74,7 +75,6 @@ This is likely due to the extra friction caused by bearings and other mechanical
 The load step is performed by connecting both the inertia and the secondary motor to the rotor.
 An electronic load is put in series with the terminals of the secondary motor.
 This will allow for an easy way of limiting the current through the secondary motor, thus limiting the load generated.
-\todo[inline]{Thus making a load?? - Mikkel}
 The motor is now run at an angular velocity of $\omega=125\frac{Rad}{S}$.
 Two loads were attempted: 0.4 and 0.5 $[A]$.
 The results of this test can be seen in figure~\ref{fig:loadstep}.
@@ -108,8 +108,7 @@ However due to the increased inertia on the system in this test the settling tim
 In this case, the real and simulated systems behaviours are very similar, both in settling time and the maximum and minimum peak values.
 These can be seen in figures~\ref{fig:loadstep04real} and \ref{fig:loadstep04simulated} respectively.
 
-\subsection{PID Controller}
-\todo{Are we talking about PID or IPD here?}
+\subsection{IPD Controller}
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.75\linewidth]{graphics/ipd_controller}
@@ -117,8 +116,9 @@ These can be seen in figures~\ref{fig:loadstep04real} and \ref{fig:loadstep04sim
 	\label{fig:ipdcontroller}
 \end{figure}
 
+\todo{Rewrite for IPD - Thomas}
 As with the PI controller, the block diagram of this controller can be seen in figure~\ref{fig:ipdcontroller}.
-In fact, the only difference between these two controllers is the inclusion of the differential gain in the PID controller.
+In fact, the only difference between these two controllers is the inclusion of the differential gain in the IPD controller.
 This inclusion, however, gave rise to significant problems.
 In order to have dSpace accepting the differential it was necessary to implement it as a low-pass filter.
 By setting the cut-off frequency to a very high value this filtering should have no effect on the system.

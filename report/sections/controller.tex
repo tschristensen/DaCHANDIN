@@ -2,14 +2,11 @@
 \section{Designing a controller}
 \label{sec:controller}
 
-\todo{PUT DOTS AT the end of figures' sentences}
-\todo[inline]{A Simulink block diagram -Mikkel}
-To control the speed of the DC motor a controller will have to be implemented to the system. A block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. From the block diagram the transfer function $P(s)$ of the motor can be derived as seen in equation~\ref{eq:fullplant}. $P(s)$ is rearranged to coincide with the form in equation~\ref{eq:simpleplant}. From the block diagram a transfer function $P(s)$ for the motor can be derived as seen in equation~\ref{eq:fullplant} on the form in equation~\ref{eq:simpleplant}.\todo{During pull, this paragraph was messed up. I fixed it, but all of you take a look at it just in case to see if it's ok.}
-
+To control the speed of the DC motor a controller will have to be implemented to the system. A Simulink block diagram of the DC motor in figure~\ref{fig:dcmotormodel} is shown in figure~\ref{fig:dcblock}. From the block diagram the transfer function $P(s)$ of the motor can be derived as seen in equation~\ref{eq:fullplant}. $P(s)$ is rearranged to coincide with the form in equation~\ref{eq:simpleplant}. 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\linewidth]{graphics/dcblockdiagram}
-	\caption{A block diagram of the full order DC motor.}
+	\caption{A Simulink block diagram of the full order DC motor.}
 	\label{fig:dcblock}
 \end{figure}
 
@@ -94,7 +91,7 @@ H(s) = \dfrac{b_0 K_I}{s^3 + (a_1 + b_0 K_D)s^2 (a_0 + b_0 K_P)s + b_0 K_I }
 
 \subsection{Noise Filtering}
 
-The derivative part of the PID controller will try to reduce every sudden change in the system. This is what helps the system stop oscillating. However, when noise is introduced into the system, the derivative term acts on the fast, sudden change and can destabilize the system. In other words, the derivative term can and will increase the noise. For this reason a low pass filter is needed on the derivative path. This is done with changing $s$ on the derivative gain to $N/(s + N)$ where $N$ is $1/T_f$ and $T_f$ is the filter time constant and N is the cut off frequency. The block diagram for the controllers then become as seen in figures~\ref{fig:pidfilter} and~\ref{fig:ipdfilter} respectively.
+The derivative part of the PID controller will resist any sudden change in the system. This is what helps the system stop oscillating. However, when noise is introduced into the system, the derivative term acts on the fast, sudden change and can destabilize the system. In other words, the derivative term can and will increase the noise. For this reason a low pass filter is needed on the derivative path. This is done with changing $s$ on the derivative gain to $N/(s + N)$ where $N$ is $1/T_f$ and $T_f$ is the filter time constant and N is the cut off frequency. The block diagram for the controllers then become as seen in figures~\ref{fig:pidfilter} and~\ref{fig:ipdfilter} respectively.
 
 \begin{figure}[!h]
 	\centering
@@ -113,7 +110,10 @@ The derivative part of the PID controller will try to reduce every sudden change
 
 \subsection{Anti-Windup Design}
 \todo[inline]{Maybe we should tell that saturation is the source of the nonlinear region. And explain why antiwindup is needed. I think we also should write something else than "smoother behavior" as it is not very much in engineering terms-Mikkel}
-During the function of the controller, there is a possibility that it will operate in a nonlinear region where increasing the control signal has no effect on the system output. This introduces time delay to the response of the system, thus reducing its overall performance. This behaviour can be counteracted using an anti-windup strategy such as the one in figure~\ref{fig:ipdantiwindupstrategy}.
+\todo{Explanation of the appearance of the nonlinear region-Erlingur}
+During the function of the controller, there is a possibility that it will operate in a nonlinear region where increasing the control signal has no effect on the system output. 
+This introduces time delay to the response of the system, thus reducing its overall performance. 
+This behaviour can be counteracted using an anti-windup strategy such as the one in figure~\ref{fig:ipdantiwindupstrategy}.
 
 \begin{figure}[!h]
 	\centering
@@ -122,10 +122,7 @@ During the function of the controller, there is a possibility that it will opera
 	\label{fig:ipdantiwindupstrategy}
 \end{figure}
 
-As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces smoother behaviour into the system. The gain $K$ is the one that determines that behaviour and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in figure~\ref{fig:pidwindupvaluecomp}.
-
-One major disadvantage of implementing such a strategy is that the settling time suffers for low values. This phenomena can be seen in figure~\ref{fig:antiwindupresponses} where the desired settling time of $T_s$ = 0.01 is giving an error of approximately 55\%. 
-\todo[inline]{This really does not sound right. The antiwindup is not making the response slower. Only faster!! IT is tested in the wrong way -Mikkel}
+As figure~\ref{fig:antiwindupresponses} shows, using this strategy eliminates the overshoot of the system. The gain $K$ is the one that determines that behaviour and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in figure~\ref{fig:pidwindupvaluecomp}.
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
@@ -143,8 +140,6 @@ One major disadvantage of implementing such a strategy is that the settling time
 	\caption{Responses of controllers without and with anti-windup design.}\label{fig:antiwindupresponses}
 \end{figure}
 
-\todo[inline]{Not sure I understand this graph. We should discuss tomorrow -Mikkel}
-\todo[inline]{Maybe we need to show a graph of what the antiwindup is really doing?-Mikkel}
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.6\linewidth]{graphics/pidwindupvaluecomp}
@@ -217,7 +212,6 @@ K_P &= 0.2752
 K_D &= 1.7910\cdot10^{-4}
 \end{align*}
 
-\todo[inline]{What is the settling time in the first example and why do we calculate two times? -Mikkel}
 And again for a settling time $T_s$ = 100~ms
 
 \begin{align*}
@@ -230,7 +224,7 @@ K_D &= -5.3532\cdot10^{-4}
 
 
 \subsubsection{Reduced Order Systems}
-\todo[inline]{We should tell why we can reduce the order. Maybe a pole zero plot -Mikkel}
+\todo[inline]{We should tell why we can reduce the order. Maybe a pole zero plot -Erlingur}
 In the case of a reduced order system, the controller derivative's gain is equal to zero and the inductance of the motor $L_a$ is not taken into account during the calculations. The reduced transfer function takes the form of equation~\ref{eq:pireducedtf}.
 
 \begin{equation}
