@@ -124,20 +124,19 @@ During the function of the controller, there is a possibility that it will opera
 
 As figure~\ref{fig:antiwindupresponses} shows, using this strategy introduces smoother behaviour into the system. The gain $K$ is the one that determines that behaviour and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in figure~\ref{fig:pidwindupvaluecomp}.
 
-One major disadvantage of implementing such a strategy is that the settling time suffers for low values. This phenomena can be seen in figure~\ref{fig:antiwindupresponses} where the desired settling time of $T_s$ = 0.01 is giving an error of approximately 55\%. 
-\todo[inline]{This really does not sound right. The antiwindup is not making the response slower. Only faster!! IT is tested in the wrong way -Mikkel}
+One major disadvantage of implementing such a strategy is that the settling time suffers for low values. This phenomena can be seen in figure~\ref{fig:antiwindupresponses} where the desired settling time of $T_s$ = 0.01 is giving an error of approximately 55\%.
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{graphics/pidwindupresponse}
-		\caption{PID controller}
+		\caption{PID controller.}
 		\label{fig:pidwindupresponse}
 	\end{subfigure}
 	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
 	%(or a blank line to force the subfigure onto a new line)
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{graphics/ipdwindupresponse}
-		\caption{IPD controller}
+		\caption{IPD controller.}
 		\label{fig:ipdwindupresponse}
 	\end{subfigure}
 	\caption{Responses of controllers without and with anti-windup design.}\label{fig:antiwindupresponses}
