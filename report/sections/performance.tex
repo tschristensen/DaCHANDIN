@@ -117,12 +117,11 @@ These can be seen in figures~\ref{fig:loadstep04real} and \ref{fig:loadstep04sim
 \end{figure}
 
 \todo{Rewrite for IPD - Thomas}
-As with the PI controller, the block diagram of this controller can be seen in figure~\ref{fig:ipdcontroller}.
-In fact, the only difference between these two controllers is the inclusion of the differential gain in the IPD controller.
-This inclusion, however, gave rise to significant problems.
+A Simulink block diagram of this controller can be seen in figure~\ref{fig:ipdcontroller}.
+One difference between this controller and the PI controller described previously, is the inclusion of the differential gain. 
+This inclusion gave rise to significant problems.
 In order to have dSpace accepting the differential it was necessary to implement it as a low-pass filter.
-By setting the cut-off frequency to a very high value this filtering should have no effect on the system.
+By setting the cut-off frequency to a high value this filtering should have no effect on the system.
 This was found to not be the case. 
-At values above $\approx$1000 the controller becomes unstable.
+At values above $\approx$1000$Hz$ the controller becomes unstable.
 At these low values the filter still has a significant impact on the performance of the controller and it was not possible to obtain any sensible data on the performance of this controller.
-

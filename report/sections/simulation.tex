@@ -10,14 +10,12 @@ To prevent the saturation limit to be reached, the settling time is set to 0.1~s
 		\caption{PI Speed control at 125 rad/s.}
 		\label{fig:pisingle125}
 	\end{subfigure}
-	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-	%(or a blank line to force the subfigure onto a new line)
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{graphics/PI_single200}
 		\caption{PI Speed control at 200 rad/s.}
 		\label{fig:pisingle200}
 	\end{subfigure}
-	\caption{The PI controller at two different angular velocities. It is noticed that the desired settling time is reached in both cases.}\label{fig:pisingle}
+	\caption[The PI controller at two different angular velocities.]{The PI controller at two different angular velocities. It is noticed that the desired settling time is reached in both cases.}\label{fig:pisingle}
 \end{figure}
 
 \begin{figure}[h!]
@@ -27,8 +25,6 @@ To prevent the saturation limit to be reached, the settling time is set to 0.1~s
 		\caption{IPD Speed control at 125 rad/s.}
 		\label{fig:ipdsingle125}
 	\end{subfigure}
-	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-	%(or a blank line to force the subfigure onto a new line)
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{graphics/IPD_single200}
 		\caption{IPD Speed control at 200 rad/s.}
@@ -46,14 +42,12 @@ The simulation confirms that the controllers behave similar for both simulated a
 		\caption{PI Speed control at 125 rad/s.}
 		\label{fig:piload125}
 	\end{subfigure}
-	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-	%(or a blank line to force the subfigure onto a new line)
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{graphics/PI_load200}
 		\caption{PI Speed control at 200 rad/s.}
 		\label{fig:piload200}
 	\end{subfigure}
-	\caption{The PI controller at two different angular velocities with added load. Desired settling time is not reached. Instead, it introduces an overshoot and does not become stable until it is close to 1s.}
+	\caption[The PI controller at two different angular velocities with added load.]{The PI controller at two different angular velocities with added load. Desired settling time is not reached. Instead, it introduces an overshoot and does not become stable until it is close to 1s.}
 	\label{fig:piload}
 \end{figure}
 
@@ -64,14 +58,12 @@ The simulation confirms that the controllers behave similar for both simulated a
 		\caption{IPD Speed control at 125 rad/s.}
 		\label{fig:ipdload125}
 	\end{subfigure}
-	~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-	%(or a blank line to force the subfigure onto a new line)
 	\begin{subfigure}[b]{0.45\textwidth}
 		\includegraphics[width=\textwidth]{graphics/IPD_load200}
 		\caption{IPD Speed control at 200 rad/s.}
 		\label{fig:ipdload200}
 	\end{subfigure}
-	\caption{The IPD controller at two different angular velocities with added load. The desired settling time is far from being reached. The system becomes stable at around 13s.}
+	\caption[The IPD controller at two different angular velocities with added load.]{The IPD controller at two different angular velocities with added load. The desired settling time is far from being reached. The system becomes stable at around 13s.}
 	\label{fig:ipdload}
 \end{figure}
 

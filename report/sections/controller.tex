@@ -109,7 +109,6 @@ The derivative part of the PID controller will resist any sudden change in the s
 
 
 \subsection{Anti-Windup Design}
-\todo[inline]{Maybe we should tell that saturation is the source of the nonlinear region. And explain why antiwindup is needed. I think we also should write something else than "smoother behavior" as it is not very much in engineering terms-Mikkel}
 \todo{Explanation of the appearance of the nonlinear region-Erlingur}
 During the function of the controller, there is a possibility that it will operate in a nonlinear region where increasing the control signal has no effect on the system output. 
 This introduces time delay to the response of the system, thus reducing its overall performance. 
@@ -144,7 +143,7 @@ As figure~\ref{fig:antiwindupresponses} shows, using this strategy eliminates th
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.6\linewidth]{graphics/pidwindupvaluecomp}
-	\caption{PID behaviour with different anti-windup gain. The higher gain being 10000 while the lower is 10.}
+	\caption[PID behaviour with different anti-windup gain.]{PID behaviour with different anti-windup gain. The higher gain being 10000 while the lower is 10.}
 	\label{fig:pidwindupvaluecomp}
 \end{figure}
 
