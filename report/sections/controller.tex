@@ -109,11 +109,18 @@ The derivative part of the PID controller will resist any sudden change in the s
 
 
 \subsection{Anti-Windup Design}
-\todo[inline]{Maybe we should tell that saturation is the source of the nonlinear region. And explain why antiwindup is needed. I think we also should write something else than "smoother behavior" as it is not very much in engineering terms-Mikkel}
-\todo{Explanation of the appearance of the nonlinear region-Erlingur}
+
 During the function of the controller, there is a possibility that it will operate in a nonlinear region where increasing the control signal has no effect on the system output. 
-This introduces time delay to the response of the system, thus reducing its overall performance. 
+This happens when the system requires more voltage than can be supplied to it, this behaviour is shown in figure~\ref{fig:ipdsat}.
+when this happens a time delay is introduces to the response, thus reducing its overall performance. 
 This behaviour can be counteracted using an anti-windup strategy such as the one in figure~\ref{fig:ipdantiwindupstrategy}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.6\linewidth]{graphics/ipdsat}
+	\caption{The voltage saturation limit. More voltage is required than what can be supplied.}
+	\label{fig:ipdsat}
+\end{figure}
 
 \begin{figure}[!h]
 	\centering
@@ -121,6 +128,10 @@ This behaviour can be counteracted using an anti-windup strategy such as the one
 	\caption{Block diagram of the IPD controller with anti-windup design}
 	\label{fig:ipdantiwindupstrategy}
 \end{figure}
+
+
+
+
 
 As figure~\ref{fig:antiwindupresponses} shows, using this strategy eliminates the overshoot of the system. The gain $K$ is the one that determines that behaviour and can be chosen doing experiments using trial and error. An interesting observation is that the value of $K$ for the PID controller is quite different from the one for the IPD controller. Specifically, a suitable value for PID is $K=10$, while for IPD is $K=10000$. That conclusion has been reached through experiments, and the results can be seen in figure~\ref{fig:pidwindupvaluecomp}.
 
@@ -225,7 +236,15 @@ K_D &= -5.3532\cdot10^{-4}
 
 
 \subsubsection{Reduced Order Systems}
-\todo[inline]{We should tell why we can reduce the order. Maybe a pole zero plot -Erlingur}
+When looking at the Pole-Zero map in figure~\ref{fig:poles} it is clear that the electrical pole is much faster then the mechanical one. This allows the usage of a reduced order system. 
+
+\begin{figure}
+	\centering
+	\includegraphics[scale = 0.5]{graphics/poles}
+	\caption{Pole zero plot of the full order system. The electrical pole to the left and the mechanical to the right. The electrical pole is much faster.}
+	\label{fig:poles}
+\end{figure}
+
 In the case of a reduced order system, the controller derivative's gain is equal to zero and the inductance of the motor $L_a$ is not taken into account during the calculations. The reduced transfer function takes the form of equation~\ref{eq:pireducedtf}.
 
 \begin{equation}
